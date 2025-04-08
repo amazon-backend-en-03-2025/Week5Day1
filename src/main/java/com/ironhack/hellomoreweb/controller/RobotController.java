@@ -1,11 +1,10 @@
 package com.ironhack.hellomoreweb.controller;
 
+import com.ironhack.hellomoreweb.dto.RobotMinimalRequest;
 import com.ironhack.hellomoreweb.model.Robot;
 import com.ironhack.hellomoreweb.service.RobotService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +28,17 @@ public class RobotController {
     @GetMapping("/{id}")
     public Robot getRobotById(@PathVariable int id) {
         return robotService.getRobotById(id);
+    }
+
+    @PostMapping
+   @ResponseStatus(HttpStatus.CREATED)
+    public Robot addRobot(@RequestBody RobotMinimalRequest robot){
+        return robotService.addRobot(robot);
+    }
+
+    @PostMapping("/custom")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Robot addCustomRobot(@RequestBody Robot robot){
+        return robotService.addRobot(robot);
     }
 }

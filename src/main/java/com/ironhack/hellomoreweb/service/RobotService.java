@@ -1,5 +1,6 @@
 package com.ironhack.hellomoreweb.service;
 
+import com.ironhack.hellomoreweb.dto.RobotMinimalRequest;
 import com.ironhack.hellomoreweb.model.Robot;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,19 @@ public class RobotService {
             }
         }
         return null;
+    }
+
+
+
+    public Robot addRobot(Robot robot){
+        Robot robotToAdd = new Robot(currentId++, robot.getModel(), robot.getName());
+        robotsStorage.add(robotToAdd);
+        return robotToAdd;
+    }
+
+    public Robot addRobot(RobotMinimalRequest robotMinimalRequest){
+        Robot robotToAdd = new Robot(currentId++, robotMinimalRequest.getModel(), robotMinimalRequest.getName());
+        robotsStorage.add(robotToAdd);
+        return robotToAdd;
     }
 }
