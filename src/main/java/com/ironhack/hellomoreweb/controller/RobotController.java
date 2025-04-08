@@ -1,6 +1,7 @@
 package com.ironhack.hellomoreweb.controller;
 
 import com.ironhack.hellomoreweb.dto.RobotMinimalRequest;
+import com.ironhack.hellomoreweb.dto.UpdateNameDTO;
 import com.ironhack.hellomoreweb.model.Robot;
 import com.ironhack.hellomoreweb.service.RobotService;
 import org.springframework.http.HttpStatus;
@@ -41,4 +42,22 @@ public class RobotController {
     public Robot addCustomRobot(@RequestBody Robot robot){
         return robotService.addRobot(robot);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteRobotById(@PathVariable int id){
+        robotService.deleteRobotById(id);
+    }
+
+    @PatchMapping("/{id}/name")
+    public Robot updateRobotName(@PathVariable int id, @RequestBody UpdateNameDTO updateNameDTO) {
+        return robotService.changeRobotName(id, updateNameDTO);
+    }
+
+    @PutMapping("/{id}")
+    public Robot updateRobot(@PathVariable int id, @RequestBody Robot robot) {
+        return robotService.updateRobot(id, robot);
+    }
+
+
 }
